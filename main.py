@@ -46,4 +46,24 @@ if response.status_code == 200:
     print(df.head())
 else:
     print("No se pudieron descargar los datos")
+
+
+# Para descargar un archivo CSV:
+url = "https://www.datos.gov.co/resource/thwd-ivmp.csv?$query=SELECT%0A%20%20%60ano%60%2C%0A%20%20%60mes%60%2C%0A%20%20%60codigo_rnt%60%2C%0A%20%20%60cod_mun%60%2C%0A%20%20%60cod_dpto%60%2C%0A%20%20%60estado_rnt%60%2C%0A%20%20%60razon_social_establecimiento%60%2C%0A%20%20%60departamento%60%2C%0A%20%20%60municipio1%60%2C%0A%20%20%60categoria1%60%2C%0A%20%20%60sub_categoria1%60%2C%0A%20%20%60habitaciones1%60%2C%0A%20%20%60camas1%60%2C%0A%20%20%60num_emp1%60"
+response = requests.get(url)
+
+# Verificar si la solicitud fue exitosa
+if response.status_code == 200:
+    # Guardar los datos en un archivo en disco
+    open("datos.csv", "wb").write(response.content)
+
+    # Leer los datos en un DataFrame de pandas
+    df = pd.read_csv("datos.csv")
+    print(df.head())
+else:
+    print("No se pudieron descargar los datos")
+
+    
+
+
     
